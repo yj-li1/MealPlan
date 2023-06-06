@@ -6,15 +6,18 @@ import { useState } from 'react'
 
 
 function App() {
-  const [profileData, setProfileData] = useState(null)
+  const [response, setResponse] = useState(null)
+  const [input, setInput] = useState('');
 
   function getResponse() {
     axios({
       method: "POST",
       url:"/",
+      headers: {'Content-Type': 'application/json'},
+      data: {"content": input}
     })
     .then((response) => {
-      setProfileData(response.data.content)
+      setResponse(response.data.content)
       console.log(response.data.content)
     }).catch((error) => {
       if (error.response) {
@@ -29,7 +32,8 @@ function App() {
         <img src={logo} alt="logo" />
         <h2>Your Personalized Path to Nutritional Balance</h2>
         <Button type="primary" shape="round" onClick={getResponse}>Join the Healthy Eating Revolution</Button>
-        <p>Response: {profileData}</p>
+        <input type="text" id="input" value={input} onChange={(e) => setInput(e.target.value)}/>
+        <p>Response: {response}</p>
       </header>
     </div>
   );
