@@ -10,12 +10,12 @@ function App() {
 
   function getResponse() {
     axios({
-      method: "GET",
-      url:"/profile",
+      method: "POST",
+      url:"/",
     })
     .then((response) => {
-      setProfileData(response.data.return)
-      console.log(response.data.return)
+      setProfileData(response.data.content)
+      console.log(response.data.content)
     }).catch((error) => {
       if (error.response) {
         console.log(error.response)
